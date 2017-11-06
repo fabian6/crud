@@ -13,5 +13,5 @@ router.get('/nuevo', controllers.productoscontroller.getNuevoProducto);
 router.post('/crearproducto', controllers.productoscontroller.postNuevoProducto);
 router.post('/eliminarproducto', controllers.productoscontroller.eliminarProducto);
 router.get('/modificar/:id', controllers.productoscontroller.getModificarProducto);
-
+router.post('/editar', controllers.productoscontroller.postModificarProducto);
 module.exports = router;

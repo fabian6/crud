@@ -1,4 +1,5 @@
 var mysql = require('mysql');
+
 var dateFormat = require('dateformat');
 //controladores.
 //creamos una funcion que devuelve una vista o un resultado, lo ponemos como funcion de una ruta
@@ -68,7 +69,7 @@ module.exports = {//guarda en el modulo las funciones
   },
   getModificarProducto : function(req, res, next){
     var id = req.params.id;//por get es params y por post es body
-    var id= req.body.id;
+
     var config = require('.././database/config');
 
     var db = mysql.createConnection(config);
@@ -76,12 +77,30 @@ module.exports = {//guarda en el modulo las funciones
 
     var producto = null; //donde guardamos el producto
 
-    db.query('SELECT * FROM productos WHERE id_producto = ?', [id], function(err,rows,fields){
+    db.query('SELECT * FROM productos WHERE id_producto = ?',id, function(err,rows,fields){
         if(err) throw err;
         producto = rows;
         db.end();
 
         res.render('productos/modificar', {producto: producto});
     });
+  },
+  postModificarProducto : function(req, res, next){
+     var producto = {
+      nombre : req.body.nombre,
+      precio : req.body.precio,
+      stock : req.body.stock,
+      
+    }
+    var config = require('.././database/config');
+
+    var db = mysql.createConnection(config);
+    db.connect();
+    db.query('UPDATE productos SET ? WHERE ?', [producto, {id_producto : req.body.id_producto}], function(err,rows,fields){
+      if(err) throw err;
+
+      db.end();
+    });
+    res.redirect('/productos');
   }
 }

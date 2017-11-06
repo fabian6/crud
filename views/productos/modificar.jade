@@ -5,19 +5,20 @@ block content
 
   div(class=['ui', 'container', 'grid', 'stackable'])
     div(class=['ten', 'wide', 'column'])
-      h2(class=['ui', 'header', 'blue', 'dividing'])= 'Crear Producto'
+      h2(class=['ui', 'header', 'blue', 'dividing'])= 'Modificar Producto'
       div(class='form-nuevoproducto')
-        form(class=['ui','form'] action='http://localhost:3000/crearproducto' method= 'post')
+        form(class=['ui','form'] action='http://localhost:3000/editar' method= 'post')
           div(class=['ui','field'])
             label(for='nombre')='Nombre del producto'
-            input(type='text' name= 'nombre' placeholder= 'Nombre')
+            input(type='text' name= 'nombre' placeholder= 'Nombre' value= producto[0].nombre )
           div(class=['ui','two','fields'])
             div(class=['ui','field'])
               label(for='nombre')='Precio'
-              input(type='text' name= 'precio' placeholder= 'Precio')
+              input(type='text' name= 'precio' placeholder= 'Precio' value= producto[0].precio )
             div(class=['ui','field'])
               label(for='nombre')='Stock'
-              input(type='text' name= 'stock' placeholder= 'Stock')
+              input(type='text' name= 'stock' placeholder= 'Stock' value = producto[0].stock)
+              input(type='hidden' name= 'id_producto'  value = producto[0].id_producto)
           button(class=['ui', 'button','basic','black'])= 'Crear Producto'
           div(class=['ui','message','error'])
     
