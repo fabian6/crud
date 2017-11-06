@@ -76,7 +76,7 @@ module.exports = {//guarda en el modulo las funciones
 
     var producto = null; //donde guardamos el producto
 
-    db.query('SELECT * FROM productos WHERE id_producto = ?', id, function(err,rows,fields){
+    db.query('SELECT * FROM productos WHERE id_producto = ?', [id], function(err,rows,fields){
         if(err) throw err;
         producto = rows;
         db.end();
